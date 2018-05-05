@@ -1,0 +1,62 @@
+@charset "utf-8";
+
+// color schemes
+
+// --- Spring --- //
+$spring-text-color:       #242C27 !default; // charleston green
+$spring-background-color: #F4FFFD !default; // mint cream
+$spring-brand-color:      #25B0E8 !default; // bright cerulean
+$spring-grey-color:       #969696 !default; // spanish gray
+$spring-grey-color-light: lighten($spring-grey-color, 40%) !default;
+$spring-grey-color-dark:  darken($spring-grey-color, 25%) !default;
+
+// --- Defaults --- //
+
+$base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$base-font-size:   14px !default;
+$base-font-weight: 400 !default;
+$base-font-spacing: 1px;
+$small-font-size:  $base-font-size * 0.875 !default;
+$base-line-height: 1.5 !default;
+
+$spacing-unit:     30px !default;
+
+$text-color:       $spring-text-color;
+$background-color: $spring-background-color;
+$brand-color:      $spring-brand-color;
+
+$grey-color:       $spring-grey-color;
+$grey-color-light: $spring-grey-color-light;
+$grey-color-dark:  $spring-grey-color-dark;
+
+$table-text-align: left !default;
+
+// Width of the content area
+$content-width:    800px !default;
+
+$on-palm:          600px !default;
+$on-laptop:        800px !default;
+
+// Use media queries like this:
+// @include media-query($on-palm) {
+//   .wrapper {
+//     padding-right: $spacing-unit / 2;
+//     padding-left: $spacing-unit / 2;
+//   }
+// }
+@mixin media-query($device) {
+  @media screen and (max-width: $device) {
+    @content;
+  }
+}
+
+@mixin relative-font-size($ratio) {
+  font-size: $base-font-size * $ratio;
+}
+
+// --- Import partials --- //
+@import
+  "base",
+  "layout",
+  "syntax-highlighting"
+;
