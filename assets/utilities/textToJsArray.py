@@ -1,4 +1,5 @@
 # some utility functions I've collected
+import sys
 
 def textToJsArray(filename):
     '''
@@ -8,7 +9,14 @@ def textToJsArray(filename):
     f1 = f.readlines()
     result = "["
     for x in f1:
-     result += "'"+x.rstrip()+"', "
+     result += "'"+x.rstrip().capitalize()+"', "
     result = result[:-2]
     result += "]"
     print(result)
+
+def main():
+    for arg in sys.argv:
+        textToJsArray(arg)
+
+if __name__ == "__main__":
+    main()
