@@ -30,8 +30,10 @@ theme: minima
 plugins:
   - jekyll-feed
 
-# minima values
+# minima value
 show_excerpts: true
+
+exclude: ['node_modules']
 header_pages:
   - pages/about.md
 
