@@ -207,8 +207,6 @@
   @include relative-font-size(1.5);
 }
 
-
-
 /**
  * Posts
  */
@@ -223,6 +221,16 @@
 
   @include media-query($on-laptop) {
     @include relative-font-size(2.25);
+  }
+}
+
+.post-subtitle {
+  @include relative-font-size(1.625);
+  letter-spacing: -1px;
+  line-height: 1;
+
+  @include media-query($on-laptop) {
+    @include relative-font-size(1.25);
   }
 }
 

@@ -6,10 +6,11 @@ def textToJsArray(filename):
     put the file in the same directory as this method
     '''
     f = open(filename, "r")
-    f1 = f.readlines()
+    lines = f.readlines()
     result = "["
-    for x in f1:
-     result += "'"+x.rstrip().capitalize()+"', "
+    for line in lines:
+     # result += "'"+x.rstrip().capitalize()+"', "
+     result += "'" + line.rstrip() + "', "
     result = result[:-2]
     result += "]"
     print(result)
