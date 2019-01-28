@@ -8,7 +8,7 @@ permalink: /notes
 <h3>Computer Science</h3>
 <ul>
   <!-- <li><a href='/algorithms'>Algorithms</a></li> -->
-  <!-- <li><a href='/data-structures'>Data Structures</a></li> -->
+  <li><a href='/data-structures'>Data Structures</a></li>
 </ul>
 
 <h3>Programming Languages</h3>
