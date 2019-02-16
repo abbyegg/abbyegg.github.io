@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Algorithms
-permalink: /algorithms
+permalink: /notes/algorithms
 ---
 
 beep boop
