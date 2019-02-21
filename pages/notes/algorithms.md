@@ -4,4 +4,6 @@ title: Algorithms
 permalink: /notes/algorithms
 ---
 
-beep boop
+## [Searching](/notes/algorithms/searching)
+
+## [Sorting](/notes/algorithms/sorting)

@@ -6,7 +6,11 @@ permalink: /notes
 ---
 
 ### Computer Science
-* [Data Structures](/notes/data-structures)
+
+[Data Structures](/notes/data-structures)
+
+[Algorithms](/notes/algorithms)
 
 ### Languages
-* [Java](/notes/java)
+
+[Java](/notes/java)
