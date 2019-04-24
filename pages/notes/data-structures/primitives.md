@@ -40,6 +40,22 @@ Some slightly Java specific notes:
 
 ### Problems
 
+#### Add two numbers
+
+* Write a program which computes the sum of two numbers without using the '+' or '-' operator
+
+```
+public static void computeSum(int a, int b) {
+  if (a == 0) return b;
+  while (b > 0) {
+    int carry = a & b;
+    a ^= b;
+    b = carry << 1;
+  }
+  return a;
+}
+```
+
 #### Compute the parity of a word
 
 * The parity of a binary word is 1 if the number of 1s in the word is odd, otherwise, it is 0.

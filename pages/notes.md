@@ -11,6 +11,13 @@ permalink: /notes
 
 [Algorithms](/notes/algorithms)
 
+[Programming Paradigms](/notes/paradigms)
+
 ### Languages
 
-[Java](/notes/java)
+[JavaScript](/notes/javascript)
+
+### Misc
+
+[Design Problems](/notes/design-problems)
+

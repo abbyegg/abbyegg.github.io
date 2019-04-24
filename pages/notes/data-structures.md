@@ -21,3 +21,5 @@ permalink: /notes/data-structures
 ## [Hash Tables](/notes/data-structures/hash-tables)
 
 ## [Binary Search Trees](/notes/data-structures/binary-search-trees)
+
+## [Graphs](/notes/data-structures/graphs)

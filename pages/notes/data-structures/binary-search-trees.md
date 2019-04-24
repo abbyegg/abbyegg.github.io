@@ -4,8 +4,7 @@ title: Binary Search Trees
 permalink: /notes/data-structures/binary-search-trees
 ---
 
-Binary search trees can be used to solve almost any problem!
-They are a tree such that 
+Binary search trees are a tree such that 
   
   **a.** Each node only has two children, a right and left subtree, and 
   
