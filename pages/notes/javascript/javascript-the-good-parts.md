@@ -1,3 +1,9 @@
+---
+layout: page
+title: JavaScript Notes
+permalink: /notes/javascript/javascript-the-good-parts
+---
+
 # Notes on Javascript the Good Parts
 
 ## Table of Contents
@@ -15,7 +21,7 @@
 * [Appendix B - the Bad Parts](#appendixB)
 * [Appendix C - JSLint](#appendixC)
 
-## <a name="chapter1"/></a> Chapter 1 - Good Parts
+## <a name="chapter1"></a> Chapter 1 - Good Parts
 ---
 Good parts:
 * functions
@@ -28,7 +34,7 @@ Bad parts:
 
 Javascript has **prototypal inheritance**, meaning a prototype (an instance of a class) inherits properties directly from the other object.
 
-## <a name="chapter2"/></a> Chapter 2 - Grammar
+## <a name="chapter2"></a> Chapter 2 - Grammar
 ---
 
 * Almost all whitespace is flexible, however there is a need to have at least one whitespace character between tokens.
@@ -96,7 +102,7 @@ for (myvariable in object) {
 * An *invocation* is (expression 1, expression 2)
 * *refinement* is either .name or [expression] as used in an array
 
-## <a name="chapter3"/></a> Chapter 3 - Objects
+## <a name="chapter3"></a> Chapter 3 - Objects
 
 * Everything besides numbers, strings, booleans, null and undefined are objects, including arrays and functions
 * Objects are class-free
@@ -163,22 +169,22 @@ typeof flight.manifest // 'undefined'
 
 
 
-## <a name="chapter4"/></a> Chapter 4 - Functions
+## <a name="chapter4"></a> Chapter 4 - Functions
 
-## <a name="chapter5"/></a> Chapter 5 - Inheritance
+## <a name="chapter5"></a> Chapter 5 - Inheritance
 
-## <a name="chapter5"/></a> Chapter 6 - Arrays
+## <a name="chapter5"></a> Chapter 6 - Arrays
 
-## <a name="chapter5"/></a> Chapter 7 - Regular Expressions
+## <a name="chapter5"></a> Chapter 7 - Regular Expressions
 
-## <a name="chapter5"/></a> Chapter 8 - Methods
+## <a name="chapter5"></a> Chapter 8 - Methods
 
-## <a name="chapter5"/></a> Chapter 9 - Style
+## <a name="chapter5"></a> Chapter 9 - Style
 
-## <a name="chapter5"/></a> Chapter 10 - Beautiful Features
+## <a name="chapter5"></a> Chapter 10 - Beautiful Features
 
-## <a name="appendixA"/></a> Appendix A - The Awful Parts
+## <a name="appendixA"></a> Appendix A - The Awful Parts
 
-## <a name="appendixB"/></a> Appendix B - The Bad Parts
+## <a name="appendixB"></a> Appendix B - The Bad Parts
 
-## <a name="appendixC"/></a> Appendix C - JSLint
+## <a name="appendixC"></a> Appendix C - JSLint
