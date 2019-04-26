@@ -139,9 +139,49 @@ for (let num of nums) {
 
 ### Template Literals
 
+* Useful for capturing whitespace as well as string interpolation of variables
+* Between the curly braces must return a string, but can be code
+
 ```
 let name = 'Abby';
 let description = `
-    Check this out! My name is &{name}!
+    Check this out! My name is ${name}!
 `;
+```
+
+### Destructuring
+
+**Destructuring Arrays**
+
+* Simplifies syntax for getting variables in iterables
+* Must be requested by position!
+
+```
+let nums = [1, 2, 3];
+let [a, b] = nums;
+
+// or...
+let [a, , b] = nums;
+
+// can be used to swap numbers
+let a = 1;
+let b = 2;
+[b, a] = [a, b];
+```
+
+* Can also set default values for the destructuring syntax
+* Name must correspond to the name in the object, however, can use an alias like `let {name1, greet: hello}` to refer to the function as `hello` instead
+
+**Destructuring Objects**
+
+```
+let obj = {
+    name: 'Abby',
+    greet: function() {
+        console.log('Hello');
+    }
+};
+let {name1, greet} = obj;
+
+greet(): // prints 'Hello'
 ```
