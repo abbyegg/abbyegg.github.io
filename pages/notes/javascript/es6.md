@@ -170,7 +170,6 @@ let b = 2;
 ```
 
 * Can also set default values for the destructuring syntax
-* Name must correspond to the name in the object, however, can use an alias like `let {name1, greet: hello}` to refer to the function as `hello` instead
 
 **Destructuring Objects**
 
@@ -185,3 +184,5 @@ let {name1, greet} = obj;
 
 greet(): // prints 'Hello'
 ```
+
+* Name must correspond to the name in the object, however, can use an alias like `let {name1, greet: hello}` to refer to the function as `hello` instead
