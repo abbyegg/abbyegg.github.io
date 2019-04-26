@@ -167,21 +167,367 @@ typeof flight.arrival // 'object'
 typeof flight.manifest // 'undefined'
 ```
 
+* typeof will also return any property on the prototype chain, so `typeof flight.constructor // 'function'`, to avoid this, you can use `flight.hasOwnProperty('constructor') // false`
 
+### Enumeration
+
+* The best way to enumerate all the properties you want is a for loop and an array which contains all the properties in the correct order, because a `for in` loop will loop over all properties, including functions, so you'll need to filter those out using typof and hasOwnProperty
+```
+var i;
+var properties = [
+    'first-name',
+    'middle-name',
+    'last-name'
+];
+for (i = 0; i < properties.length; i++) {
+    document.writeln(properties[i] + ': ' + 
+        person[properties[i]]);
+}
+```
+* By using for w/ a property array, we can get each property in the expected order and not get anything we don't expect
+
+### Delete
+
+* The `delete` operator can be used to remove a property from an object, without affecting the objects in the prototype linkage. Syntax: `delete person.middle-name`
+
+### Global Abatement
+
+* One way to minimize global variables is to create a single global variable for your application: `var MYAPP = {};`, which is then used as the container for the application:
+```
+MYAPP.flight = {
+    airline: 'Oceanic',
+    ...
+}
+```
+* This will reduce global vars to a single name, which reduces the chance for bad interactions w/ other applications, and increases code readibility
+* Note: most MVC frameworks handle this for you
 
 ## <a name="chapter4"></a> Chapter 4 - Functions
 
+Functions are fundamental to JavaScript, they are used for:
+* code reuse
+* information hiding
+* composition
+* specify the behavior of objects
+
+### Function Objects
+
+* Functions in JavaScript are objects
+* Function objects are linked to Function.prototype (which is linked to Object.prototype)
+* Every function is also created with two additional properties: the function's context and the code that implements the function's behavior
+* Functions can be treated like objects, we can pass them as arguments to functions, assign them to variables, be used as a return value
+* The unique part is functions can be *invoked*
+
+### Function Literal
+
+* Function literals have four parts:
+    * The reserved word `function`
+    * Optional second part the function name (for recursive or debugging purposes) without a name, the function is 'anonymous'
+    * Set of parameters to the function, wrapped in parentheses
+    * Set of statements wrapped in curly braces, defining the body of the function
+```
+// Format of a function
+function name (parameterA, parameterB){
+	statements;
+}
+```
+* Functions can be nested, an inner function has access to the outer function's variables and parameters
+
+### Invocation
+
+Three cases for calling a function w/ arguments:
+
+* If arguments > number of arguments expected, the extra values will be ignored
+* If arguments < number of arguments expected, the function will assume undefined in place of the missing arguments
+* No error is thrown
+
+* In addition to declared parameters, every function receives two additional parameters: `this` and `arguments`
+* The value of `this` is determined by the invocation pattern
+* There are four patterns of invocation in JavaScript:
+    * Method invocation
+    * Function invocation
+    * Constructor invocation
+    * Apply invocation
+
+**Method Invocation Pattern**
+```
+myobject.incrementFunction();
+```
+* When a function is **stored as a property of an object**, we call it a method
+* When the method is invoked, `this` refers to the object which stores the property, and can **update** or **access** other variables in the object
+* The binding of `this` to the object occurs very late, making functions that use `this` highly reusable
+* Methods that get their object context from `this` are called **public methods**
+
+**Function Invocation Pattern**
+```
+var sum = add(3, 4);
+```
+* When a function is not the property of an object, it is invoked as a function
+* When a function is invoked in this way, `this` is bound to the **global object**, considered a "mistake in the design of the language" by Douglas Crockford
+* Issue: a method cannot define an inner function to help it do work, as it does not include the method's access to the object's `this`
+* Workaround: artificially create a new this
+
+```
+myObject.double = function() {
+    var that = this;
+    var helper = function() {
+        that.value = add(that.value, that.value);
+    }
+    helper(); // invoke helper
+};
+myObject.double();
+document.writeln(myObject.getValue()); // 6
+```
+
+**Constructor Invocation Pattern**
+
+* If a function is invoked with the `new` prefix, that function contains a link to the function's prototype
+* This means that methods that were created for the prototype function are also available to a function created using `new`
+
+```
+var Quo = function(string) {
+    this.status = string;
+}
+
+// Give all instances of Quo a public method called get_status
+Quo.prototype.get_status = function() {
+    return this.status;
+}
+
+// Make an instance of Quo
+var myQuo = new Quo("confused");
+document.writeln(myQuo.get_status()); // confused
+```
+* Functions that are intended to be used w/ the new prefix are called constructors
+* By convention, constructors are kept in variables with a capitalized name
+* This style of constructor functions is not recommended
+
+**Apply Invocation Pattern**
+
+* The `apply` method lets us construct an array of arguments to invoke a function, and choose the value bound to `this`
+* The `apply` method takes two parameters, the first is the value that should be bound to `this`, and the second is the array of parameters
+
+```
+// Make an array of 2 numbers and add them
+var array = [3, 4];
+var sum = add.apply(null, array); // sum is 7
+
+// Make an object w/ a status member
+var statusObject = {
+    status: 'A-OK'
+};
+var status = Quo.prototype.get_status.apply(statusObject);
+```
+
+### Arguments
+
+* Another default parameter available to functions is the `arguments` array, containing all the arguments that were supplied with the invocation, including excess arguments that would be ignored and not assigned to parameters
+* Because of this, we can write functions that take an unspecified number of parameters:
+
+```
+// A function that adds a lot of stuff
+
+var sum = function() {
+    var i, sum = 0;
+    for (i = 0; i < arguments.length; i++) {
+        sum += arguments[i];
+    }
+    return sum;
+};
+document.writeln(sum(4, 8, 15, 16, 23, 42)); // 108
+```
+
+* `arguments` is not really an array, it only has a length property
+
+### Return
+
+* The `return` statement can be used to cause the function to return early
+* If `return` is not specified, then `undefined` is returned
+* If the function was invoked with the `new` prefix and the `return` value is not specified, then `this` is returned instead (the new object)
+
+### Exceptions
+
+* `throw` can be used to interrupt execution of a function, we give it an `exception` object containing a `name` property and a descriptive `message` property
+* the `exception` object will be delivered to the `catch` clause of a `try` statement
+
+```
+var add = function(a, b) {
+    if (typeof a !== 'number || typeof b !== 'number) {
+        throw {
+            name: 'TypeError',
+            message: 'arguments must be numbers';
+        }
+    }
+    return a + b;
+}
+
+var tryAdd = function() {
+    try {
+        add('seven');
+    } catch (e) {
+        document.writeln(e.name + ': ' + e.message);
+    }
+}
+
+tryAdd();
+```
+
+### Augmenting Types
+
+* JavaScript allows the basic types of the language to be augmented
+* By augmenting `Function.prototype`, we can make a method available to all functions:
+
+```
+Function.prototype.method = function(name, func) {
+    this.prototype[name] = func;
+    return this;
+}
+
+Number.method('integer', function() {
+    return Math[this < 0 ? 'ceiling' : 'floor'](this);
+});
+document.writeln((-10 / 3).integer()); // -3
+```
+* Remember `for in` statements don't work well with prototypes
+
+### Recursion
+
+* Used when a task can be divided into a set of similar subproblems
+
+```
+var hanoi = function(disc, src, aux, dst) {
+    if (disc > 0) {
+        hanoi(disc-1, src, dst, aux);
+        document.writeln('Move disk ' + disc + 
+            ' from ' + src + ' to ' + dst);
+        hanoi(disc-1, aux, src, dst);
+    }
+}
+hanoi(3, 'src', 'aux', 'dst');
+```
+* JavaScript does not provide tail recursive optimizations
+
+### Scope
+
+* JavaScript does not have block scope, but it does have function scope
+* It is best to declare all variables used in a function at the top of the function body
+
+### Closure
+
+* Inner functions get access to the actual **parameters of the outer functions** (with the exception of `this` and `arguments`)
+* If we create a myObject by setting it equal to a function which returns an object, it will have access to the variables/context declared in that function, called a closure
+
+```
+var myObject = function() {
+    var value = 0; // a private variable
+    return {
+        increment: function(inc) {
+            value += typeof inc === 'number' ? inc : 1;
+        },
+        getValue: function() {
+            return value;
+        }
+    }
+}();
+```
+
+* By including the `()` on the last line, we are returning the object containing the two methods
+
+### Callbacks
+
+* Callbacks are functions passed as parameters to a function, which will be executed when a certain cpu/io intensive task is completed
+* Benefit is we don't wait for long tasks, the code will immediately return from a request call, but will also execute the callback when the request returns
+
+### Module
+
+* A *module* is a function or object that presents an interface, but hides its state and implementation
+* Using functions to produce modules, we can avoid global variables
+* It is essentially using function scope and closures keep the variables and functions contained within as private as well as binding them to a non-global object - whilst still being accessible to that object
+* Can also produce secure objects, as methods do not contain `this` or `that`
+* We can replace the methods, but we still cannot replace or change the way they work
+* There is some convention around capitalizing the first character of a module
+
+### Cascade
+
+* Some methods will return nothing, as they may only set or change state of an object.
+* It is possible to make these functions return `this`, and therefore enable cascades
+
+```
+getElement('myBoxDiv').
+    move(350, 150).
+    width(100).
+    height(100).
+    color('red');
+```
+
+* Cascades help to modularize code
+
+### Curry
+
+* Currying enables us to produce a **new function**, by **combining a function and an argument**
+* JavaScript doesn't have a native curry method, but it can be added:
+
+```
+Function.method('curry', function() {
+    var slice = Array.prototype.slice,
+        args = slice.apply(arguments),
+        that = this;
+    return function() {
+        return that.apply(null, args.concat(slice.apply(arguments)));
+    };
+});
+```
+
+### Memoization
+
+* Functions can use objects to recall previous operations, which removes tons of unnecessary work in recursive functions
+
+```
+var fibonacci = function() {
+    var memo = [0, 1];
+    var fib = function(n) {
+        var result = memo[n];
+        if (typeof result !== 'number') {
+            result = fib(n-1) + fib(n-2);
+            memo[n] = result;
+        }
+        return result;
+    };
+    return fib;
+}();
+
+// more generically
+
+var memoizer = function(memo, fundamental) {
+    var shell = function(n) {
+        var result = memo[n];
+        if (typeof result !== 'number') {
+            result = fundamental(shell, n);
+            memo[n] = result;
+        }
+        return result;
+    };
+    return shell;
+};
+
+// and then more simply:
+
+var fibonacci = memoizer([0,1], function(shell, n) {
+    return shell(n-1) + shell(n-2);
+});
+```
+
 ## <a name="chapter5"></a> Chapter 5 - Inheritance
 
-## <a name="chapter5"></a> Chapter 6 - Arrays
+## <a name="chapter6"></a> Chapter 6 - Arrays
 
-## <a name="chapter5"></a> Chapter 7 - Regular Expressions
+## <a name="chapter7"></a> Chapter 7 - Regular Expressions
 
-## <a name="chapter5"></a> Chapter 8 - Methods
+## <a name="chapter8"></a> Chapter 8 - Methods
 
-## <a name="chapter5"></a> Chapter 9 - Style
+## <a name="chapter9"></a> Chapter 9 - Style
 
-## <a name="chapter5"></a> Chapter 10 - Beautiful Features
+## <a name="chapter10"></a> Chapter 10 - Beautiful Features
 
 ## <a name="appendixA"></a> Appendix A - The Awful Parts
 
