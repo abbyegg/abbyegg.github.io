@@ -5,7 +5,7 @@ subtitle: (aka the learning zone)
 permalink: /notes
 ---
 
-### Computer Science
+<!-- ### Computer Science
 
 [Data Structures](/notes/data-structures)
 
@@ -19,5 +19,5 @@ permalink: /notes
 
 ### Misc
 
-[Design Problems](/notes/design-problems)
+[Design Problems](/notes/design-problems) -->
 
