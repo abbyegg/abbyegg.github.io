@@ -8,12 +8,12 @@
 title: ▲▲▲
 email: aegrobbel@gmail.com
 description: >-
-  Personal webpage for programming, art, and creative content, powered by Jekyll.
+  Personal webpage for programming, art, and creative content.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-github_username:  abbygrbl
+github_username:  abbyegg
 linkedin_username: abbygrobbel
-instagram_username: abbygrbl
+instagram_username: abigail_egg
 
 
 # Build settings
@@ -37,19 +37,19 @@ defaults:
       type: posts
     values:
       layout: post
-      author: Abby Grobbel
+      author: Abby
   - scope:
       path: ""
       type: drafts
     values:
       layout: post
-      author: Abby Grobbel
+      author: Abby
   - scope:
       path: ""
       type: pages
     values:
       layout: page
-      author: Abby Grobbel
+      author: Abby
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
